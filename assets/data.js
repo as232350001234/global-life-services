@@ -25,7 +25,7 @@ const GLS_COUNTRIES = [
   { code: 'JP', flag: '🇯🇵', region: 'apac', name: { en: 'Japan', zh: '日本' } },
   { code: 'KR', flag: '🇰🇷', region: 'apac', name: { en: 'South Korea', zh: '韩国' } },
   { code: 'SG', flag: '🇸🇬', region: 'apac', name: { en: 'Singapore', zh: '新加坡' } },
-  { code: 'HK', flag: '🇭🇰', region: 'apac', name: { en: 'Hong Kong', zh: '香港' } },
+  { code: 'HK', flag: '🇭🇰', region: 'apac', name: { en: 'Hong Kong', zh: '中国香港' } },
   { code: 'AE', flag: '🇦🇪', region: 'mea', name: { en: 'UAE', zh: '阿联酋' } },
   { code: 'SA', flag: '🇸🇦', region: 'mea', name: { en: 'Saudi Arabia', zh: '沙特阿拉伯' } },
 ];
