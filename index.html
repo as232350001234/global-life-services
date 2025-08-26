@@ -212,6 +212,11 @@
           for (const part of base) {
             const syns = this.synonyms(part);
             for (const s of syns) expanded.push(s);
+            // handle common double-letter typo at end (e.g., visaa -> visa)
+            const p = this.normalize(part);
+            if (p && p.length > 3 && p[p.length-1] === p[p.length-2]) {
+              expanded.push(p.slice(0, -1));
+            }
           }
           // simple stemming for English plural/ing/ed
           const stemmed = expanded.flatMap(t => this.stem(t));
@@ -243,16 +248,20 @@
             'shoujika': ['手机卡','sim','esim','mobile'],
             '签证': ['visa','prepaid','virtual','card','finance','banking'],
             'visa': ['visa','prepaid','virtual','card','finance','banking'],
+            'visaa': ['visa'],
             'visa card': ['visa','prepaid','virtual card','card','finance','banking'],
             '礼品卡': ['gift card','gift cards','giftcard','giftcards','apple gift','itunes','top up','top-up','voucher'],
             '苹果礼品卡': ['apple gift card','itunes','gift card','voucher','苹果卡'],
             '苹果卡': ['apple gift card','礼品卡','itunes','voucher'],
+            'appl': ['apple'],
+            'giff': ['gift'],
             '香港': ['hk','hong kong','中国香港','香港'],
             '找工作': ['jobs','job','career','careers','recruitment','hiring','employment','岗位','招聘','求职'],
             '招聘': ['jobs','job','career','hiring','employment','求职'],
             '求职': ['jobs','job','career','employment','招聘'],
             '工作': ['job','jobs','career','招聘','求职'],
             'jobs': ['jobs','job','career','hiring','employment','招聘','求职'],
+            'jbos': ['jobs'],
             'zhaogongzuo': ['找工作','jobs','job','career','招聘','求职'],
             'gongzuo': ['工作','job','jobs','career','招聘','求职'],
             'esjm': ['esim'],
@@ -298,9 +307,16 @@
             else if (this.prefixToken(desc, tok)) score += 1.5;
             else if (this.fuzzyIncludes(desc, tok)) score += 0.75;
 
+            // country/region: includes/prefix/fuzzy + code exact
             if (this.includesToken(country, tok)) score += 2;
+            else if (this.prefixToken(country, tok)) score += 1;
+            else if (this.fuzzyIncludes(country, tok)) score += 1;
             if (tok === ccode) score += 2;
+
+            // category: includes/prefix/fuzzy
             if (this.includesToken(category, tok)) score += 1.5;
+            else if (this.prefixToken(category, tok)) score += 0.75;
+            else if (this.fuzzyIncludes(category, tok)) score += 0.75;
           }
           if (this.activeCategory !== 'all' && it.category === this.activeCategory) score += 1;
           return score;
