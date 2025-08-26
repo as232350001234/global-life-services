@@ -68,7 +68,7 @@
 
       <section class="grid">
         <a class="card" v-for="item in filteredItems" :key="item.id"
-           :href="item.url" target="_blank" rel="noopener">
+           :href="item.url" target="_blank" rel="noopener noreferrer">
           <div class="card-head">
             <div class="card-title">
               <span class="flag">{{ flag(item.country) }}</span>
