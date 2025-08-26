@@ -24,7 +24,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router@3.6.5/dist/vue-router.min.js"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Global Life Services","url":"https://life-services-website-0dcfte88.devinapps.com/"}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Global Life Services Categories","itemListElement":[{"@type":"ListItem","position":1,"name":"Shopping"},{"@type":"ListItem","position":2,"name":"Mobile/Data"},{"@type":"ListItem","position":3,"name":"Visa & Finance"},{"@type":"ListItem","position":4,"name":"Apple Gift Cards"},{"@type":"ListItem","position":5,"name":"Streaming"},{"@type":"ListItem","position":6,"name":"Travel"},{"@type":"ListItem","position":7,"name":"Other Services"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Global Life Services Categories","itemListElement":[{"@type":"ListItem","position":1,"name":"Shopping"},{"@type":"ListItem","position":2,"name":"Mobile/Data"},{"@type":"ListItem","position":3,"name":"Visa & Finance"},{"@type":"ListItem","position":4,"name":"Jobs"},{"@type":"ListItem","position":5,"name":"Apple Gift Cards"},{"@type":"ListItem","position":6,"name":"Streaming"},{"@type":"ListItem","position":7,"name":"Travel"},{"@type":"ListItem","position":8,"name":"Other Services"}]}</script>
 </head>
 <body>
   <div id="app">
@@ -114,6 +114,7 @@
         catMobile: '手机卡/流量',
         catVisa: 'Visa卡与金融',
         catApple: '苹果礼品卡',
+        catJobs: '找工作',
         catStreaming: '流媒体/订阅',
         catTravel: '出行/交通',
         catOther: '其他服务',
@@ -130,6 +131,7 @@
         catMobile: 'Mobile/Data',
         catVisa: 'Visa & Finance',
         catApple: 'Apple Gift Cards',
+        catJobs: 'Jobs',
         catStreaming: 'Streaming',
         catTravel: 'Travel',
         catOther: 'Other',
@@ -160,6 +162,7 @@
           { key: 'shopping', i18n: 'catShopping' },
           { key: 'mobile', i18n: 'catMobile' },
           { key: 'visa', i18n: 'catVisa' },
+          { key: 'jobs', i18n: 'catJobs' },
           { key: 'apple', i18n: 'catApple' },
           { key: 'streaming', i18n: 'catStreaming' },
           { key: 'travel', i18n: 'catTravel' },
@@ -210,7 +213,11 @@
             'visa': ['visa','prepaid','virtual','card','finance'],
             '礼品卡': ['gift card','apple gift','itunes','top up','top-up'],
             '苹果礼品卡': ['apple gift card','itunes','gift card'],
-            '香港': ['hk','hong kong','香港']
+            '香港': ['hk','hong kong','香港'],
+            '找工作': ['jobs','job','career','careers','recruitment','hiring','employment','岗位','招聘','求职'],
+            '招聘': ['jobs','job','career','hiring','employment','求职'],
+            '求职': ['jobs','job','career','employment','招聘'],
+            'jobs': ['jobs','job','career','hiring','employment','招聘','求职']
           };
           const extra = map[s] || [];
           return Array.from(new Set([s, ...extra]));
@@ -222,6 +229,7 @@
             case 'mobile': return 'catMobile';
             case 'visa': return 'catVisa';
             case 'apple': return 'catApple';
+            case 'jobs': return 'catJobs';
             case 'streaming': return 'catStreaming';
             case 'travel': return 'catTravel';
             default: return 'catOther';
