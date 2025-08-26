@@ -1,8 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://life-services-website-0dcfte88.devinapps.com/</loc>
-    <priority>1.0</priority>
-    <changefreq>weekly</changefreq>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- 主页 - 中文版本 -->
+    <url>
+        <loc>https://global.twenhub.com/</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <!-- 双语支持的hreflang标签 -->
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/" />
+    </url>
+    
+    <!-- 主页 - 英文版本 -->
+    <url>
+        <loc>https://global.twenhub.com/?lang=en</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/" />
+    </url>
+    
+    <!-- 分类页面 - Shopping -->
+    <url>
+        <loc>https://global.twenhub.com/?category=shopping</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=shopping&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=shopping&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=shopping" />
+    </url>
+    
+    <!-- 分类页面 - Mobile/Data -->
+    <url>
+        <loc>https://global.twenhub.com/?category=mobile-data</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=mobile-data&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=mobile-data&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=mobile-data" />
+    </url>
+    
+    <!-- 分类页面 - Visa & Finance -->
+    <url>
+        <loc>https://global.twenhub.com/?category=visa-finance</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=visa-finance&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=visa-finance&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=visa-finance" />
+    </url>
+    
+    <!-- 分类页面 - Apple Gift Cards -->
+    <url>
+        <loc>https://global.twenhub.com/?category=apple-gift-cards</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=apple-gift-cards&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=apple-gift-cards&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=apple-gift-cards" />
+    </url>
+    
+    <!-- 分类页面 - Streaming -->
+    <url>
+        <loc>https://global.twenhub.com/?category=streaming</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=streaming&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=streaming&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=streaming" />
+    </url>
+    
+    <!-- 分类页面 - Travel -->
+    <url>
+        <loc>https://global.twenhub.com/?category=travel</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=travel&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=travel&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=travel" />
+    </url>
+    
+    <!-- 分类页面 - Other -->
+    <url>
+        <loc>https://global.twenhub.com/?category=other</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?category=other&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?category=other&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?category=other" />
+    </url>
+    
+    <!-- 主要国家/地区页面 -->
+    <!-- 美国 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=us</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=us&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=us&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=us" />
+    </url>
+    
+    <!-- 英国 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=uk</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=uk&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=uk&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=uk" />
+    </url>
+    
+    <!-- 加拿大 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=canada</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=canada&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=canada&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=canada" />
+    </url>
+    
+    <!-- 德国 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=germany</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=germany&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=germany&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=germany" />
+    </url>
+    
+    <!-- 日本 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=japan</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=japan&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=japan&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=japan" />
+    </url>
+    
+    <!-- 香港 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=hong-kong</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=hong-kong&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=hong-kong&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=hong-kong" />
+    </url>
+    
+    <!-- 新加坡 -->
+    <url>
+        <loc>https://global.twenhub.com/?country=singapore</loc>
+        <lastmod>2025-08-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://global.twenhub.com/?country=singapore&amp;lang=zh" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://global.twenhub.com/?country=singapore&amp;lang=en" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://global.twenhub.com/?country=singapore" />
+    </url>
+    
 </urlset>
