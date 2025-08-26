@@ -173,22 +173,23 @@
         filteredItems() {
           const cat = this.activeCategory;
           const ctry = this.activeCountry;
-          const q = this.search.trim().toLowerCase();
-          const tokens = q ? this.synonyms(q) : [];
+          const q = this.search.trim();
 
-          return this.items.filter(it => {
+          // Pre-filter by category/country
+          let base = this.items.filter(it => {
             if (cat !== 'all' && it.category !== cat) return false;
             if (ctry && it.country !== ctry) return false;
-
-            if (!q) return true;
-            const fields = [
-              it.name.en, it.name.zh,
-              it.desc.en, it.desc.zh,
-              (this.countryName(it.country) || ''),
-              (it.tags || []).join(' ')
-            ].join(' ').toLowerCase();
-            return tokens.some(tok => fields.includes(tok));
+            return true;
           });
+
+          if (!q) return base;
+
+          const tokens = this.makeTokens(q);
+          // Score and sort
+          const scored = base.map(it => ({ it, score: this.scoreItem(it, tokens) }))
+                             .filter(x => x.score > 0)
+                             .sort((a,b) => b.score - a.score);
+          return scored.map(x => x.it);
         }
       },
       methods: {
@@ -203,25 +204,129 @@
           if (!c) return '';
           return c.name[this.lang] || c.name.en;
         },
-        synonyms(q) {
-          const s = q.toLowerCase();
+
+        // Build smart tokens: split, normalize, expand synonyms, simple stemming
+        makeTokens(q) {
+          const base = q.split(/[\s\/、,|]+/).filter(Boolean);
+          const expanded = [];
+          for (const part of base) {
+            const syns = this.synonyms(part);
+            for (const s of syns) expanded.push(s);
+          }
+          // simple stemming for English plural/ing/ed
+          const stemmed = expanded.flatMap(t => this.stem(t));
+          const tokens = Array.from(new Set(stemmed.map(this.normalize)));
+          return tokens.filter(Boolean);
+        },
+        normalize(s) {
+          return (s || '').toLowerCase().trim();
+        },
+        stem(s) {
+          const t = this.normalize(s);
+          if (!t) return [];
+          const out = new Set([t]);
+          if (t.endsWith('es')) out.add(t.slice(0,-2));
+          if (t.endsWith('s')) out.add(t.slice(0,-1));
+          if (t.endsWith('ing')) out.add(t.slice(0,-3));
+          if (t.endsWith('ed')) out.add(t.slice(0,-2));
+          return Array.from(out);
+        },
+
+        // Domain synonyms
+        synonyms(term) {
+          const s = this.normalize(term);
           const map = {
-            '手机卡': ['sim','esim','mobile','phone card','上网卡','流量','预付卡','mvno','carrier'],
-            '电话卡': ['sim','esim','mobile','上网卡','流量'],
-            '流量': ['data','esim','mobile'],
-            '签证': ['visa','prepaid','virtual','card','finance'],
-            'visa': ['visa','prepaid','virtual','card','finance'],
-            '礼品卡': ['gift card','apple gift','itunes','top up','top-up'],
-            '苹果礼品卡': ['apple gift card','itunes','gift card'],
-            '香港': ['hk','hong kong','香港'],
+            '手机卡': ['sim','esim','mobile','phone card','上网卡','流量','预付卡','mvno','carrier','plan'],
+            '电话卡': ['sim','esim','mobile','上网卡','流量','plan'],
+            '流量': ['data','esim','mobile','plan'],
+            '签证': ['visa','prepaid','virtual','card','finance','banking'],
+            'visa': ['visa','prepaid','virtual','card','finance','banking'],
+            '礼品卡': ['gift card','apple gift','itunes','top up','top-up','voucher'],
+            '苹果礼品卡': ['apple gift card','itunes','gift card','voucher'],
+            '香港': ['hk','hong kong','中国香港','香港'],
             '找工作': ['jobs','job','career','careers','recruitment','hiring','employment','岗位','招聘','求职'],
             '招聘': ['jobs','job','career','hiring','employment','求职'],
             '求职': ['jobs','job','career','employment','招聘'],
-            'jobs': ['jobs','job','career','hiring','employment','招聘','求职']
+            'jobs': ['jobs','job','career','hiring','employment','招聘','求职'],
+            '工作': ['job','jobs','career','招聘','求职'],
+            '流媒体': ['streaming','subscription','订阅','媒体'],
+            '出行': ['travel','transport','交通']
           };
           const extra = map[s] || [];
           return Array.from(new Set([s, ...extra]));
         },
+
+        // Scoring
+        scoreItem(it, tokens) {
+          const name = this.normalize([it.name.en, it.name.zh].filter(Boolean).join(' '));
+          const desc = this.normalize([it.desc.en, it.desc.zh].filter(Boolean).join(' '));
+          const tags = this.normalize((it.tags || []).join(' '));
+          const country = this.normalize(this.countryName(it.country) || '');
+          const category = this.normalize(this.t(this.catI18n(it.category)));
+
+          let score = 0;
+          for (const tok of tokens) {
+            // exact/prefix matches
+            if (this.includesToken(name, tok)) score += 8;
+            else if (this.prefixToken(name, tok)) score += 4;
+            else if (this.fuzzyIncludes(name, tok)) score += 2;
+
+            if (this.includesToken(tags, tok)) score += 6;
+            else if (this.prefixToken(tags, tok)) score += 3;
+            else if (this.fuzzyIncludes(tags, tok)) score += 1.5;
+
+            if (this.includesToken(desc, tok)) score += 3;
+            else if (this.prefixToken(desc, tok)) score += 1.5;
+            else if (this.fuzzyIncludes(desc, tok)) score += 0.75;
+
+            if (this.includesToken(country, tok)) score += 2;
+            if (this.includesToken(category, tok)) score += 1.5;
+          }
+          // small boost if category equals active
+          if (this.activeCategory !== 'all' && it.category === this.activeCategory) score += 1;
+          return score;
+        },
+        includesToken(text, tok) {
+          if (!text || !tok) return false;
+          return text.includes(tok);
+        },
+        prefixToken(text, tok) {
+          if (!text || !tok) return false;
+          const parts = text.split(/[^a-z0-9\u4e00-\u9fa5]+/);
+          return parts.some(p => p && p.startsWith(tok));
+        },
+
+        // Fuzzy matching with small typo tolerance against words
+        fuzzyIncludes(text, tok) {
+          if (!text || !tok) return false;
+          const parts = text.split(/[^a-z0-9\u4e00-\u9fa5]+/).filter(Boolean);
+          const maxDist = tok.length <= 4 ? 1 : 2;
+          for (const p of parts) {
+            if (Math.abs(p.length - tok.length) > maxDist) continue;
+            if (this.levenshtein(p, tok) <= maxDist) return true;
+          }
+          return false;
+        },
+        levenshtein(a, b) {
+          const m = a.length, n = b.length;
+          if (m === 0) return n;
+          if (n === 0) return m;
+          const dp = Array.from({length: m+1}, () => new Array(n+1).fill(0));
+          for (let i=0;i<=m;i++) dp[i][0]=i;
+          for (let j=0;j<=n;j++) dp[0][j]=j;
+          for (let i=1;i<=m;i++) {
+            for (let j=1;j<=n;j++) {
+              const cost = a[i-1] === b[j-1] ? 0 : 1;
+              dp[i][j] = Math.min(
+                dp[i-1][j] + 1,
+                dp[i][j-1] + 1,
+                dp[i-1][j-1] + cost
+              );
+            }
+          }
+          return dp[m][n];
+        },
+
         catI18n(catKey) {
           switch (catKey) {
             case 'all': return 'catAll';
