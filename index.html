@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Life Services</title>
+  <meta name="description" content="Global life services navigator: overseas shopping, mobile SIM/eSIM, data, Visa cards, Apple gift cards and more. Chinese/English bilingual."/>
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;circle cx='50' cy='50' r='46' fill='black'/&gt;&lt;/svg&gt;">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./assets/styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.6.5/dist/vue-router.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="site-header">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-text">Global Life Services</span>
+      </div>
+      <div class="controls">
+        <input class="search" v-model="search" :placeholder="t('searchPlaceholder')" />
+        <select class="lang" v-model="lang" @change="persistLang">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>{{ t('title') }}</h1>
+        <p class="subtitle">{{ t('subtitle') }}</p>
+        <div class="chips">
+          <button v-for="c in categories" :key="c.key"
+                  class="chip" :class="{active: c.key===activeCategory}"
+                  @click="activeCategory=c.key">
+            {{ t(c.i18n) }}
+          </button>
+        </div>
+      </section>
+
+      <section class="filters">
+        <div class="filter-group">
+          <label>{{ t('regionFilter') }}</label>
+          <div class="chips wrap">
+            <button class="chip small" :class="{active: activeRegion===null}" @click="activeRegion=null">{{ t('all') }}</button>
+            <button class="chip small" v-for="r in regions" :key="r.key"
+                    :class="{active: activeRegion===r.key}" @click="activeRegion=r.key">
+              {{ t(r.i18n) }}
+            </button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>{{ t('countryFilter') }}</label>
+          <div class="chips wrap">
+            <button class="chip small" :class="{active: activeCountry===null}" @click="activeCountry=null">{{ t('all') }}</button>
+            <button class="chip small" v-for="c in countriesByRegion" :key="c.code"
+                    :class="{active: activeCountry===c.code}" @click="activeCountry=c.code">
+              <span class="flag">{{ c.flag }}</span> {{ c.name[lang] || c.name.en }}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <a class="card" v-for="item in filteredItems" :key="item.id"
+           :href="item.url" target="_blank" rel="noopener">
+          <div class="card-head">
+            <div class="card-title">
+              <span class="flag">{{ flag(item.country) }}</span>
+              <h3>{{ item.name[lang] || item.name.en }}</h3>
+            </div>
+            <span class="badge">{{ t(catI18n(item.category)) }}</span>
+          </div>
+          <p class="desc">{{ item.desc[lang] || item.desc.en }}</p>
+          <div class="meta">
+            <span v-if="item.country">{{ countryName(item.country) }}</span>
+            <span v-if="item.tags && item.tags.length" class="tags">
+              <span class="tag" v-for="tg in item.tags" :key="tg">{{ tg }}</span>
+            </span>
+          </div>
+        </a>
+      </section>
+
+      <section class="empty" v-if="!filteredItems.length">
+        <p>{{ t('noResults') }}</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© {{ new Date().getFullYear() }} Global Life Services</p>
+        <p>{{ t('footerNote') }}</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="./assets/data.js"></script>
+  <script>
+    const i18n = {
+      zh: {
+        title: '全球生活服务导航',
+        subtitle: '覆盖海外购物、手机卡/流量、Visa卡、苹果礼品卡等服务，支持中英文搜索与浏览。',
+        searchPlaceholder: '搜索服务/国家/标签…',
+        regionFilter: '按地区筛选',
+        countryFilter: '按国家筛选',
+        all: '全部',
+        catShopping: '海外购物',
+        catMobile: '手机卡/流量',
+        catVisa: 'Visa卡与金融',
+        catApple: '苹果礼品卡',
+        catOther: '其他服务',
+        noResults: '没有匹配的结果，请调整筛选或搜索词。',
+        footerNote: '所有链接均在新标签打开，内容仅供参考，请以官网为准。',
+        region_americas: '美洲',
+        region_europe: '欧洲',
+        region_apac: '亚太',
+        region_mea: '中东非'
+      },
+      en: {
+        title: 'Global Life Services Navigator',
+        subtitle: 'Overseas shopping, mobile SIM/eSIM & data, Visa cards, Apple gift cards and more. Bilingual (EN/ZH) with search.',
+        searchPlaceholder: 'Search services/country/tags…',
+        regionFilter: 'Filter by Region',
+        countryFilter: 'Filter by Country',
+        all: 'All',
+        catShopping: 'Shopping',
+        catMobile: 'Mobile/Data',
+        catVisa: 'Visa & Finance',
+        catApple: 'Apple Gift Cards',
+        catOther: 'Other',
+        noResults: 'No results. Try adjusting filters or search.',
+        footerNote: 'Links open in a new tab. Info is for reference only; see official sites.',
+        region_americas: 'Americas',
+        region_europe: 'Europe',
+        region_apac: 'APAC',
+        region_mea: 'MEA'
+      }
+    };
+
+    function detectLang() {
+      const saved = localStorage.getItem('gls_lang');
+      if (saved) return saved;
+      const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      if (nav.includes('zh')) return 'zh';
+      if (nav.includes('en')) return 'en';
+      return 'en';
+    }
+
+    new Vue({
+      el: '#app',
+      data: {
+        lang: detectLang(),
+        search: '',
+        activeCategory: 'shopping',
+        activeRegion: null,
+        activeCountry: null,
+        countries: GLS_COUNTRIES,
+        items: GLS_ITEMS,
+        categories: [
+          { key: 'shopping', i18n: 'catShopping' },
+          { key: 'mobile', i18n: 'catMobile' },
+          { key: 'visa', i18n: 'catVisa' },
+          { key: 'apple', i18n: 'catApple' },
+          { key: 'other', i18n: 'catOther' },
+        ],
+        regions: [
+          { key: 'americas', i18n: 'region_americas' },
+          { key: 'europe', i18n: 'region_europe' },
+          { key: 'apac', i18n: 'region_apac' },
+          { key: 'mea', i18n: 'region_mea' },
+        ]
+      },
+      computed: {
+        countriesByRegion() {
+          if (!this.activeRegion) return this.countries;
+          return this.countries.filter(c => c.region === this.activeRegion);
+        },
+        filteredItems() {
+          const cat = this.activeCategory;
+          const reg = this.activeRegion;
+          const ctry = this.activeCountry;
+          const q = this.search.trim().toLowerCase();
+
+          return this.items.filter(it => {
+            if (it.category !== cat) return false;
+            if (reg) {
+              const country = this.countries.find(c => c.code === it.country);
+              if (!country || country.region !== reg) return false;
+            }
+            if (ctry && it.country !== ctry) return false;
+
+            if (!q) return true;
+            const fields = [
+              it.name.en, it.name.zh,
+              it.desc.en, it.desc.zh,
+              (this.countryName(it.country) || ''),
+              (it.tags || []).join(' ')
+            ].join(' ').toLowerCase();
+            return fields.includes(q);
+          });
+        }
+      },
+      methods: {
+        t(key) { return (i18n[this.lang] && i18n[this.lang][key]) || i18n.en[key] || key; },
+        persistLang() { localStorage.setItem('gls_lang', this.lang); },
+        flag(code) {
+          const c = this.countries.find(c => c.code === code);
+          return c ? c.flag : '🏳️';
+        },
+        countryName(code) {
+          const c = this.countries.find(c => c.code === code);
+          if (!c) return '';
+          return c.name[this.lang] || c.name.en;
+        },
+        catI18n(catKey) {
+          switch (catKey) {
+            case 'shopping': return 'catShopping';
+            case 'mobile': return 'catMobile';
+            case 'visa': return 'catVisa';
+            case 'apple': return 'catApple';
+            default: return 'catOther';
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
