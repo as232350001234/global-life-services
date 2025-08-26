@@ -6,24 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Global Life Services | 全球生活服务导航</title>
   <meta name="description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。"/>
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="canonical" href="https://life-services-website-0dcfte88.devinapps.com/">
+  <link rel="alternate" href="https://life-services-website-0dcfte88.devinapps.com/" hreflang="x-default">
   <link rel="alternate" href="https://life-services-website-0dcfte88.devinapps.com/" hreflang="en">
   <link rel="alternate" href="https://life-services-website-0dcfte88.devinapps.com/" hreflang="zh">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Global Life Services | 全球生活服务导航">
   <meta property="og:description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。">
   <meta property="og:url" content="https://life-services-website-0dcfte88.devinapps.com/">
+  <meta property="og:image" content="https://life-services-website-0dcfte88.devinapps.com/assets/og.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Global Life Services | 全球生活服务导航">
   <meta name="twitter:description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。">
+  <meta name="twitter:image" content="https://life-services-website-0dcfte88.devinapps.com/assets/og.svg">
   <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;circle cx='50' cy='50' r='46' fill='black'/&gt;&lt;/svg&gt;">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net"/>
+  <link rel="preload" href="./assets/styles.css" as="style"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="./assets/styles.css"/>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router@3.6.5/dist/vue-router.min.js"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Global Life Services","url":"https://life-services-website-0dcfte88.devinapps.com/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://life-services-website-0dcfte88.devinapps.com/","potentialAction":{"@type":"SearchAction","target":"https://life-services-website-0dcfte88.devinapps.com/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://life-services-website-0dcfte88.devinapps.com/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Global Life Services Categories","itemListElement":[{"@type":"ListItem","position":1,"name":"Shopping"},{"@type":"ListItem","position":2,"name":"Mobile/Data"},{"@type":"ListItem","position":3,"name":"Visa & Finance"},{"@type":"ListItem","position":4,"name":"Jobs"},{"@type":"ListItem","position":5,"name":"Apple Gift Cards"},{"@type":"ListItem","position":6,"name":"Streaming"},{"@type":"ListItem","position":7,"name":"Travel"},{"@type":"ListItem","position":8,"name":"Other Services"}]}</script>
 </head>
 <body>
@@ -62,7 +71,7 @@
             <button class="chip small" :class="{active: activeCountry===null}" @click="activeCountry=null">{{ t('all') }}</button>
             <button class="chip small" v-for="c in countries" :key="c.code"
                     :class="{active: activeCountry===c.code}" @click="activeCountry=c.code">
-              <span class="flag">{{ c.flag }}</span> {{ c.name[lang] || c.name.en }}
+              <span class="flag" :aria-label="c.name[lang] || c.name.en">{{ c.flag }}</span> {{ c.name[lang] || c.name.en }}
             </button>
           </div>
         </div>
@@ -73,7 +82,7 @@
            :href="item.url" target="_blank" rel="noopener noreferrer">
           <div class="card-head">
             <div class="card-title">
-              <span class="flag">{{ flag(item.country) }}</span>
+              <span class="flag" :aria-label="countryName(item.country)">{{ flag(item.country) }}</span>
               <h3>{{ item.name[lang] || item.name.en }}</h3>
             </div>
             <span class="badge">{{ t(catI18n(item.category)) }}</span>

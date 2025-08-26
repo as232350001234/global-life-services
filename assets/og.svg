@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#111214"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <circle cx="100" cy="90" r="10" fill="#f5f5f7"/>
+  <text x="130" y="98" fill="#f5f5f7" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial" font-weight="700" font-size="28">Global Life Services</text>
+  <text x="100" y="170" fill="#cbd5e1" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial" font-size="22">Overseas shopping, SIM/eSIM &amp; data, Visa/virtual cards, Apple gift cards, streaming, travel, jobs</text>
+  <text x="100" y="210" fill="#cbd5e1" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial" font-size="22">海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行、找工作</text>
+  <rect x="100" y="300" width="340" height="60" rx="12" ry="12" fill="#1b1c1f" stroke="#2a2b31"/>
+  <text x="120" y="338" fill="#9aa0a6" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial" font-size="20">Bilingual EN/ZH • Smart Search</text>
+</svg>
