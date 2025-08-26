@@ -4,8 +4,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Global Life Services</title>
-  <meta name="description" content="Global life services navigator: overseas shopping, mobile SIM/eSIM, data, Visa cards, Apple gift cards and more. Chinese/English bilingual."/>
+  <title>Global Life Services | 全球生活服务导航</title>
+  <meta name="description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。"/>
+  <link rel="canonical" href="https://life-services-website-0dcfte88.devinapps.com/">
+  <link rel="alternate" href="https://life-services-website-0dcfte88.devinapps.com/" hreflang="en">
+  <link rel="alternate" href="https://life-services-website-0dcfte88.devinapps.com/" hreflang="zh">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Global Life Services | 全球生活服务导航">
+  <meta property="og:description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。">
+  <meta property="og:url" content="https://life-services-website-0dcfte88.devinapps.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Global Life Services | 全球生活服务导航">
+  <meta name="twitter:description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。">
   <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;circle cx='50' cy='50' r='46' fill='black'/&gt;&lt;/svg&gt;">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -13,6 +23,8 @@
   <link rel="stylesheet" href="./assets/styles.css"/>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router@3.6.5/dist/vue-router.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Global Life Services","url":"https://life-services-website-0dcfte88.devinapps.com/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Global Life Services Categories","itemListElement":[{"@type":"ListItem","position":1,"name":"Shopping"},{"@type":"ListItem","position":2,"name":"Mobile/Data"},{"@type":"ListItem","position":3,"name":"Visa & Finance"},{"@type":"ListItem","position":4,"name":"Apple Gift Cards"},{"@type":"ListItem","position":5,"name":"Streaming"},{"@type":"ListItem","position":6,"name":"Travel"},{"@type":"ListItem","position":7,"name":"Other Services"}]}</script>
 </head>
 <body>
   <div id="app">
@@ -45,20 +57,10 @@
 
       <section class="filters">
         <div class="filter-group">
-          <label>{{ t('regionFilter') }}</label>
-          <div class="chips wrap">
-            <button class="chip small" :class="{active: activeRegion===null}" @click="activeRegion=null">{{ t('all') }}</button>
-            <button class="chip small" v-for="r in regions" :key="r.key"
-                    :class="{active: activeRegion===r.key}" @click="activeRegion=r.key">
-              {{ t(r.i18n) }}
-            </button>
-          </div>
-        </div>
-        <div class="filter-group">
           <label>{{ t('countryFilter') }}</label>
           <div class="chips wrap">
             <button class="chip small" :class="{active: activeCountry===null}" @click="activeCountry=null">{{ t('all') }}</button>
-            <button class="chip small" v-for="c in countriesByRegion" :key="c.code"
+            <button class="chip small" v-for="c in countries" :key="c.code"
                     :class="{active: activeCountry===c.code}" @click="activeCountry=c.code">
               <span class="flag">{{ c.flag }}</span> {{ c.name[lang] || c.name.en }}
             </button>
@@ -94,7 +96,6 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <p>© {{ new Date().getFullYear() }} Global Life Services</p>
-        <p>{{ t('footerNote') }}</p>
       </div>
     </footer>
   </div>
@@ -104,41 +105,35 @@
     const i18n = {
       zh: {
         title: '全球生活服务导航',
-        subtitle: '覆盖海外购物、手机卡/流量、Visa卡、苹果礼品卡等服务，支持中英文搜索与浏览。',
+        subtitle: '覆盖海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等服务，支持中英文搜索与浏览。',
         searchPlaceholder: '搜索服务/国家/标签…',
-        regionFilter: '按地区筛选',
-        countryFilter: '按国家筛选',
+        countryFilter: '按国家/地区筛选',
         all: '全部',
+        catAll: '全部',
         catShopping: '海外购物',
         catMobile: '手机卡/流量',
         catVisa: 'Visa卡与金融',
         catApple: '苹果礼品卡',
+        catStreaming: '流媒体/订阅',
+        catTravel: '出行/交通',
         catOther: '其他服务',
-        noResults: '没有匹配的结果，请调整筛选或搜索词。',
-        footerNote: '所有链接均在新标签打开，内容仅供参考，请以官网为准。',
-        region_americas: '美洲',
-        region_europe: '欧洲',
-        region_apac: '亚太',
-        region_mea: '中东非'
+        noResults: '没有匹配的结果，请调整筛选或搜索词。'
       },
       en: {
         title: 'Global Life Services Navigator',
-        subtitle: 'Overseas shopping, mobile SIM/eSIM & data, Visa cards, Apple gift cards and more. Bilingual (EN/ZH) with search.',
+        subtitle: 'Overseas shopping, mobile SIM/eSIM & data, Visa/virtual cards, Apple gift cards, streaming, travel and more. Bilingual (EN/ZH) with search.',
         searchPlaceholder: 'Search services/country/tags…',
-        regionFilter: 'Filter by Region',
-        countryFilter: 'Filter by Country',
+        countryFilter: 'Filter by Country/Region',
         all: 'All',
+        catAll: 'All',
         catShopping: 'Shopping',
         catMobile: 'Mobile/Data',
         catVisa: 'Visa & Finance',
         catApple: 'Apple Gift Cards',
+        catStreaming: 'Streaming',
+        catTravel: 'Travel',
         catOther: 'Other',
-        noResults: 'No results. Try adjusting filters or search.',
-        footerNote: 'Links open in a new tab. Info is for reference only; see official sites.',
-        region_americas: 'Americas',
-        region_europe: 'Europe',
-        region_apac: 'APAC',
-        region_mea: 'MEA'
+        noResults: 'No results. Try adjusting filters or search.'
       }
     };
 
@@ -156,42 +151,30 @@
       data: {
         lang: detectLang(),
         search: '',
-        activeCategory: 'shopping',
-        activeRegion: null,
+        activeCategory: 'all',
         activeCountry: null,
         countries: GLS_COUNTRIES,
         items: GLS_ITEMS,
         categories: [
+          { key: 'all', i18n: 'catAll' },
           { key: 'shopping', i18n: 'catShopping' },
           { key: 'mobile', i18n: 'catMobile' },
           { key: 'visa', i18n: 'catVisa' },
           { key: 'apple', i18n: 'catApple' },
-          { key: 'other', i18n: 'catOther' },
-        ],
-        regions: [
-          { key: 'americas', i18n: 'region_americas' },
-          { key: 'europe', i18n: 'region_europe' },
-          { key: 'apac', i18n: 'region_apac' },
-          { key: 'mea', i18n: 'region_mea' },
+          { key: 'streaming', i18n: 'catStreaming' },
+          { key: 'travel', i18n: 'catTravel' },
+          { key: 'other', i18n: 'catOther' }
         ]
       },
       computed: {
-        countriesByRegion() {
-          if (!this.activeRegion) return this.countries;
-          return this.countries.filter(c => c.region === this.activeRegion);
-        },
         filteredItems() {
           const cat = this.activeCategory;
-          const reg = this.activeRegion;
           const ctry = this.activeCountry;
           const q = this.search.trim().toLowerCase();
+          const tokens = q ? this.synonyms(q) : [];
 
           return this.items.filter(it => {
-            if (it.category !== cat) return false;
-            if (reg) {
-              const country = this.countries.find(c => c.code === it.country);
-              if (!country || country.region !== reg) return false;
-            }
+            if (cat !== 'all' && it.category !== cat) return false;
             if (ctry && it.country !== ctry) return false;
 
             if (!q) return true;
@@ -201,7 +184,7 @@
               (this.countryName(it.country) || ''),
               (it.tags || []).join(' ')
             ].join(' ').toLowerCase();
-            return fields.includes(q);
+            return tokens.some(tok => fields.includes(tok));
           });
         }
       },
@@ -217,12 +200,30 @@
           if (!c) return '';
           return c.name[this.lang] || c.name.en;
         },
+        synonyms(q) {
+          const s = q.toLowerCase();
+          const map = {
+            '手机卡': ['sim','esim','mobile','phone card','上网卡','流量','预付卡','mvno','carrier'],
+            '电话卡': ['sim','esim','mobile','上网卡','流量'],
+            '流量': ['data','esim','mobile'],
+            '签证': ['visa','prepaid','virtual','card','finance'],
+            'visa': ['visa','prepaid','virtual','card','finance'],
+            '礼品卡': ['gift card','apple gift','itunes','top up','top-up'],
+            '苹果礼品卡': ['apple gift card','itunes','gift card'],
+            '香港': ['hk','hong kong','香港']
+          };
+          const extra = map[s] || [];
+          return Array.from(new Set([s, ...extra]));
+        },
         catI18n(catKey) {
           switch (catKey) {
+            case 'all': return 'catAll';
             case 'shopping': return 'catShopping';
             case 'mobile': return 'catMobile';
             case 'visa': return 'catVisa';
             case 'apple': return 'catApple';
+            case 'streaming': return 'catStreaming';
+            case 'travel': return 'catTravel';
             default: return 'catOther';
           }
         }

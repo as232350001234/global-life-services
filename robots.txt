@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://life-services-website-0dcfte88.devinapps.com/sitemap.xml
