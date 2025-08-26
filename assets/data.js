@@ -131,7 +131,7 @@ const GLS_ITEMS = [
   { id: 'apple-gift-hk', category: 'apple', country: 'HK',
     name: { en: 'Apple Gift Card (HK)', zh: '苹果礼品卡（香港）' },
     desc: { en: 'Apple gift card in Hong Kong region.', zh: '苹果香港区礼品卡。' },
-    url: 'https://www.apple.com/hk-en/shop/gift-cards', tags: ['Gift Card'] },
+    url: 'https://www.apple.com/hk/shop/goto/giftcards', tags: ['Gift Card'] },
   { id: 'netflix', category: 'streaming', country: 'US',
     name: { en: 'Netflix', zh: 'Netflix' },
     desc: { en: 'Global streaming service.', zh: '全球流媒体服务。' },
@@ -351,7 +351,7 @@ const GLS_ITEMS = [
   { id: 'apple-gc-hk', category: 'apple', country: 'HK',
     name: { en: 'Apple Gift Card (HK)', zh: '苹果礼品卡（香港）' },
     desc: { en: 'Gift cards for Hong Kong Store.', zh: '适用于香港区的礼品卡。' },
-    url: 'https://www.apple.com/hk-zh/shop/gift-cards', tags: ['Gift Card'] },
+    url: 'https://www.apple.com/hk/shop/goto/giftcards', tags: ['Gift Card'] },
 
   { id: 'shipito', category: 'other', country: 'US',
     name: { en: 'Shipito', zh: 'Shipito转运' },
