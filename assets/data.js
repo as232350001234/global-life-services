@@ -197,6 +197,8 @@ const GLS_ITEMS = [
     url: 'https://www.getnomad.app', tags: ['eSIM','Travel'] },
   { id: 'holafly', category: 'mobile', country: 'ES',
     name: { en: 'Holafly', zh: 'Holafly' },
+    desc: { en: 'International eSIM data plans.', zh: '国际eSIM流量套餐。' },
+    url: 'https://holafly.com', tags: ['eSIM','Travel'] },
   { id: 'canada-rogers', category: 'mobile', country: 'CA',
     name: { en: 'Rogers', zh: 'Rogers' },
     desc: { en: 'Major Canadian carrier with 5G plans.', zh: '加拿大主要运营商，提供5G套餐。' },
@@ -291,8 +293,6 @@ const GLS_ITEMS = [
     desc: { en: 'French e-commerce for electronics and more.', zh: '法国电商，电子产品等。' },
     url: 'https://www.cdiscount.com', tags: ['Electronics','Retail'] },
 
-    desc: { en: 'International eSIM data plans.', zh: '国际eSIM流量套餐。' },
-    url: 'https://holafly.com', tags: ['eSIM','Travel'] },
 
   { id: 'wise', category: 'visa', country: 'GB',
     name: { en: 'Wise', zh: 'Wise' },
