@@ -239,18 +239,35 @@
             '手机卡': ['sim','esim','mobile','phone card','上网卡','流量','预付卡','mvno','carrier','plan'],
             '电话卡': ['sim','esim','mobile','上网卡','流量','plan'],
             '流量': ['data','esim','mobile','plan'],
+            'liuliang': ['流量','data','esim','mobile'],
+            'shoujika': ['手机卡','sim','esim','mobile'],
             '签证': ['visa','prepaid','virtual','card','finance','banking'],
             'visa': ['visa','prepaid','virtual','card','finance','banking'],
-            '礼品卡': ['gift card','apple gift','itunes','top up','top-up','voucher'],
-            '苹果礼品卡': ['apple gift card','itunes','gift card','voucher'],
+            'visa card': ['visa','prepaid','virtual card','card','finance','banking'],
+            '礼品卡': ['gift card','gift cards','giftcard','giftcards','apple gift','itunes','top up','top-up','voucher'],
+            '苹果礼品卡': ['apple gift card','itunes','gift card','voucher','苹果卡'],
+            '苹果卡': ['apple gift card','礼品卡','itunes','voucher'],
             '香港': ['hk','hong kong','中国香港','香港'],
             '找工作': ['jobs','job','career','careers','recruitment','hiring','employment','岗位','招聘','求职'],
             '招聘': ['jobs','job','career','hiring','employment','求职'],
             '求职': ['jobs','job','career','employment','招聘'],
-            'jobs': ['jobs','job','career','hiring','employment','招聘','求职'],
             '工作': ['job','jobs','career','招聘','求职'],
+            'jobs': ['jobs','job','career','hiring','employment','招聘','求职'],
+            'zhaogongzuo': ['找工作','jobs','job','career','招聘','求职'],
+            'gongzuo': ['工作','job','jobs','career','招聘','求职'],
+            'esjm': ['esim'],
             '流媒体': ['streaming','subscription','订阅','媒体'],
-            '出行': ['travel','transport','交通']
+            '出行': ['travel','transport','交通'],
+            'us': ['us','usa','united states','美国'],
+            'gb': ['gb','uk','united kingdom','英国'],
+            'uk': ['uk','united kingdom','gb','英国'],
+            'hk': ['hk','hong kong','中国香港','香港'],
+            'sg': ['sg','singapore','新加坡'],
+            'au': ['au','australia','澳大利亚'],
+            'ca': ['ca','canada','加拿大'],
+            'jp': ['jp','japan','日本'],
+            'de': ['de','germany','德国'],
+            'fr': ['fr','france','法国']
           };
           const extra = map[s] || [];
           return Array.from(new Set([s, ...extra]));
@@ -263,10 +280,12 @@
           const tags = this.normalize((it.tags || []).join(' '));
           const country = this.normalize(this.countryName(it.country) || '');
           const category = this.normalize(this.t(this.catI18n(it.category)));
+          const ccode = this.normalize(it.country || '');
 
           let score = 0;
           for (const tok of tokens) {
-            // exact/prefix matches
+            if (!tok) continue;
+            // exact/prefix/fuzzy matches
             if (this.includesToken(name, tok)) score += 8;
             else if (this.prefixToken(name, tok)) score += 4;
             else if (this.fuzzyIncludes(name, tok)) score += 2;
@@ -280,9 +299,9 @@
             else if (this.fuzzyIncludes(desc, tok)) score += 0.75;
 
             if (this.includesToken(country, tok)) score += 2;
+            if (tok === ccode) score += 2;
             if (this.includesToken(category, tok)) score += 1.5;
           }
-          // small boost if category equals active
           if (this.activeCategory !== 'all' && it.category === this.activeCategory) score += 1;
           return score;
         },
