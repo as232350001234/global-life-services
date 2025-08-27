@@ -206,7 +206,7 @@
         persistLang() { localStorage.setItem('gls_lang', this.lang); },
         flagUrl(code) {
           if (!code) return '';
-          return `https://flagcdn.com/${code.toLowerCase()}.svg`;
+          return `./assets/flags/${code.toLowerCase()}.svg`;
         },
         countryName(code) {
           const c = this.countries.find(c => c.code === code);
