@@ -31,7 +31,7 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Global Life Services","url":"https://life-services-website-0dcfte88.devinapps.com/"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://life-services-website-0dcfte88.devinapps.com/","potentialAction":{"@type":"SearchAction","target":"https://life-services-website-0dcfte88.devinapps.com/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://life-services-website-0dcfte88.devinapps.com/"}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Global Life Services Categories","itemListElement":[{"@type":"ListItem","position":1,"name":"Shopping"},{"@type":"ListItem","position":2,"name":"Mobile/Data"},{"@type":"ListItem","position":3,"name":"Visa & Finance"},{"@type":"ListItem","position":4,"name":"Apple Gift Cards"},{"@type":"ListItem","position":5,"name":"Streaming"},{"@type":"ListItem","position":6,"name":"Travel"},{"@type":"ListItem","position":7,"name":"Other Services"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Global Life Services Categories","itemListElement":[{"@type":"ListItem","position":1,"name":"Shopping"},{"@type":"ListItem","position":2,"name":"Mobile/Data"},{"@type":"ListItem","position":3,"name":"Visa & Finance"},{"@type":"ListItem","position":4,"name":"Apple Gift Cards"},{"@type":"ListItem","position":5,"name":"Digital Gift Cards"},{"@type":"ListItem","position":6,"name":"Game Cards/Top-ups"},{"@type":"ListItem","position":7,"name":"Streaming"},{"@type":"ListItem","position":8,"name":"Travel"},{"@type":"ListItem","position":9,"name":"Other Services"}]}</script>
 </head>
 <body>
   <div id="app">
@@ -121,6 +121,8 @@
         catMobile: '手机卡/流量',
         catVisa: 'Visa卡与金融',
         catApple: '苹果礼品卡',
+        catGift: '数字礼品卡',
+        catGame: '游戏点卡/充值',
         catStreaming: '流媒体/订阅',
         catTravel: '出行/交通',
         catOther: '其他服务',
@@ -137,6 +139,8 @@
         catMobile: 'Mobile/Data',
         catVisa: 'Visa & Finance',
         catApple: 'Apple Gift Cards',
+        catGift: 'Digital Gift Cards',
+        catGame: 'Game Cards/Top-ups',
         catStreaming: 'Streaming',
         catTravel: 'Travel',
         catOther: 'Other',
@@ -168,6 +172,8 @@
           { key: 'mobile', i18n: 'catMobile' },
           { key: 'visa', i18n: 'catVisa' },
           { key: 'apple', i18n: 'catApple' },
+          { key: 'gift', i18n: 'catGift' },
+          { key: 'gaming', i18n: 'catGame' },
           { key: 'streaming', i18n: 'catStreaming' },
           { key: 'travel', i18n: 'catTravel' },
           { key: 'other', i18n: 'catOther' }
@@ -215,8 +221,21 @@
             '流量': ['data','esim','mobile'],
             '签证': ['visa','prepaid','virtual','card','finance'],
             'visa': ['visa','prepaid','virtual','card','finance'],
-            '礼品卡': ['gift card','apple gift','itunes','top up','top-up'],
+            '礼品卡': ['gift card','apple gift','itunes','top up','top-up','digital card'],
             '苹果礼品卡': ['apple gift card','itunes','gift card'],
+            '游戏点卡': ['game card','gaming card','top up','top-up','充值','recharge','points'],
+            '充值': ['top up','top-up','recharge','points','voucher'],
+            'steam': ['steam','game','valve'],
+            'psn': ['psn','playstation','playstation store','sony'],
+            'playstation': ['psn','playstation store','sony'],
+            'xbox': ['xbox','microsoft','game pass'],
+            'nintendo': ['nintendo','eshop','switch'],
+            'razer': ['razer gold','game card','voucher'],
+            'google play': ['google play','android','gift card'],
+            'paysafecard': ['paysafecard','prepaid','voucher'],
+            'neopay': ['neopay','virtual visa','visa','prepaid','card'],
+            'pcgamesupply': ['pcgamesupply','gift card','game card'],
+            'carddelivery': ['carddelivery','gift card','apple gift','itunes'],
             '香港': ['hk','hong kong','香港']
           };
           const extra = map[s] || [];
@@ -229,6 +248,8 @@
             case 'mobile': return 'catMobile';
             case 'visa': return 'catVisa';
             case 'apple': return 'catApple';
+            case 'gift': return 'catGift';
+            case 'gaming': return 'catGame';
             case 'streaming': return 'catStreaming';
             case 'travel': return 'catTravel';
             default: return 'catOther';
