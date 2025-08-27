@@ -21,7 +21,7 @@
   <meta name="twitter:title" content="Global Life Services | 全球生活服务导航">
   <meta name="twitter:description" content="海外购物、手机卡/流量、Visa/虚拟卡、苹果礼品卡、流媒体、出行等全球生活服务导航。支持中英文与站内搜索。">
   <meta name="twitter:image" content="https://global.twenhub.com/assets/og.svg">
-  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;circle cx='50' cy='50' r='46' fill='black'/&gt;&lt;/svg&gt;">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -69,7 +69,7 @@
             <button class="chip small" :class="{active: activeCountry===null}" @click="activeCountry=null">{{ t('all') }}</button>
             <button class="chip small" v-for="c in countries" :key="c.code"
                     :class="{active: activeCountry===c.code}" @click="activeCountry=c.code">
-              <span class="flag" :aria-label="c.name[lang] || c.name.en">{{ c.flag }}</span> {{ c.name[lang] || c.name.en }}
+              <img class="flag" :src="flagUrl(c.code)" :alt="c.name[lang] || c.name.en" loading="lazy"> {{ c.name[lang] || c.name.en }}
             </button>
           </div>
         </div>
@@ -80,7 +80,7 @@
            :href="item.url" target="_blank" rel="noopener noreferrer">
           <div class="card-head">
             <div class="card-title">
-              <span class="flag" :aria-label="countryName(item.country)">{{ flag(item.country) }}</span>
+              <img v-if="item.country" class="flag" :src="flagUrl(item.country)" :alt="countryName(item.country)" loading="lazy">
               <h3>{{ item.name[lang] || item.name.en }}</h3>
             </div>
             <span class="badge">{{ t(catI18n(item.category)) }}</span>
@@ -204,9 +204,9 @@
       methods: {
         t(key) { return (i18n[this.lang] && i18n[this.lang][key]) || i18n.en[key] || key; },
         persistLang() { localStorage.setItem('gls_lang', this.lang); },
-        flag(code) {
-          const c = this.countries.find(c => c.code === code);
-          return c ? c.flag : '🏳️';
+        flagUrl(code) {
+          if (!code) return '';
+          return `./assets/flags/${code.toLowerCase()}.svg`;
         },
         countryName(code) {
           const c = this.countries.find(c => c.code === code);

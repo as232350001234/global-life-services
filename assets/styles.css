@@ -80,7 +80,7 @@ body {
 .tags { display: inline-flex; gap: 6px; }
 .tag { padding: 3px 8px; border: 1px solid var(--border); border-radius: 999px; color: #cbd5e1; }
 
-.flag { font-size: 16px; }
+.flag { width: 16px; height: 12px; display: inline-block; vertical-align: -2px; }
 
 .site-footer { margin-top: 24px; border-top: 1px solid var(--border); }
 .footer-inner { max-width: 1120px; margin: 0 auto; padding: 18px 24px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
