@@ -9,14 +9,7 @@
 
 <url>
   <loc>https://global.twenhub.com/</loc>
-  <lastmod>2025-08-26T09:11:02+00:00</lastmod>
-  <priority>1.00</priority>
+  <priority>1.0</priority>
+  <changefreq>weekly</changefreq>
 </url>
-<url>
-  <loc>https://global.twenhub.com/item.url</loc>
-  <lastmod>2025-08-26T09:11:02+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-
 </urlset>
